@@ -1,0 +1,43 @@
+相信不少小伙伴们都应该知道我要借助什么进行搭建后台了，没错，依旧是adminlte。adminlte是个什么东东呢？通俗的说就是一款基于bootstrap的响应模块。yii2-adminlte-asset更是一款基于yii2框架进行开发的后台主题模版，全响应式的哦，出门带手机即可登录进行管理。
+
+我们的项目采用composer进行管理，因此我们首先需要做的便是安装了。
+
+在应用目录下输入
+composer require dmstr/yii2-adminlte-asset "2.*"
+
+如果在安装过程中卡住了（报错了），可参考快速入门【安装】一文中的步骤进行安装的yii2框架，该步骤基本可顺利进行。
+
+安装好了之后我们继续进行
+
+    拷贝 vendor\dmstr\yii2-adminlte-asset\example-views\yiisoft\yii2-app 目录下面的文件到项目 backend\views, 可直接进行覆盖替换;
+    默认的yii2-adminlte是蓝色主题，可以按照下面的方式配置主题
+
+1、打开backend\config\main.php 在components中添加assetManager
+'components' => [
+    'assetManager' => [
+        'bundles' => [
+            'dmstr\web\AdminLteAsset' => [
+                'skin' => 'skin-red',
+            ],
+        ],
+    ],
+],
+2、打开 backend\views\layouts\main.php，找到body将其class修改如下
+<body class="hold-transition <?= \dmstr\helpers\AdminLteHelper::skinClass() ?> sidebar-mini">
+
+受ACF的影响，我们暂时看不出来什么，打开backend\controllers\SiteController.php文件，暂时先屏蔽掉 behaviors 方法的 access 部分，至于是什么意思，后面到了该讲的时候我们会说，现在就先把模版框架搭建好。如此一来，我们刷新下site/index看看，是不是有不同样式的主题了呢？其中配置文件中的skin还有下面的其他样式，随便替换，喜欢哪个用哪个，只需要简单的配置即可。（笔者还没配置过yellow的主题色，赶紧尝试了一把）
+
+"skin-blue",
+"skin-black",
+"skin-red",
+"skin-yellow",
+"skin-purple",
+"skin-green",
+"skin-blue-light",
+"skin-black-light",
+"skin-red-light",
+"skin-yellow-light",
+"skin-purple-light",
+"skin-green-light"
+
+这不就简单的搭建好了我们的管理后台，样式也都是很ok。如果你需要更多的关于该模版的样式，请浏览器中打开 vendor\almasaeed2010\adminlte\index.html 文件进行参考，涵盖你想要的。
